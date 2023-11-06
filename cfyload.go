@@ -56,22 +56,20 @@ func SetMap(v reflect.Value, n int, ss []string) int {
     n++
   }
   v.Set(m)
-  
   return n 
 }
 
-
 func SetStruct(v reflect.Value, n int, ss []string) int {
-	n++ 
-	for j := 0; j < v.NumField(); j++ {
-		n += j
-		if v.Field(j).Kind().String() != "struct"  {
-		  SetField(v.Field(j), ss[n])
-		} else {
-			n = SetStruct(v.Field(j), n, ss) - 1
-		}
-	}
-	return n
+  	n++ 
+  	for j := 0; j < v.NumField(); j++ {
+  		if v.Field(j).Kind().String() != "struct"  {
+  		  SetField(v.Field(j), ss[n])
+  		  n++ 
+  		} else {
+  			n = SetStruct(v.Field(j), n, ss) + 1
+  		}
+  	}
+  	return n - 1
 }
 
 func SetField(v reflect.Value, s string) {
@@ -94,7 +92,6 @@ func SetField(v reflect.Value, s string) {
 		  v.Set(SetSlice(v, s))
 	}
 }
-
 
 func SetSlice(v reflect.Value, ss string) reflect.Value {
 	t := v.Type().Elem()
@@ -163,4 +160,3 @@ func LoadConfy(c any) (any, error) {
 	inf := SetFields(v, ss)
 	return inf, nil
 }
-
