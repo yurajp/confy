@@ -146,11 +146,11 @@ func BuildString(v Vall) string {
 
 func WriteConfig(s string) error {
 	par := strings.Split(Path, "/")
-	if len(fold) > 1 {
+	if len(par) > 1 {
 		par = par[:len(par)-1]
 		fold := strings.Join(par, "/")
-	  if _, err := os.Stat("config"); os.IsNotExist(err) {
-		  os.Mkdir("config", 0750)
+	  if _, err := os.Stat(fold); os.IsNotExist(err) {
+		  os.Mkdir(fold, 0750)
 	  }
 	}
 	f, err := os.OpenFile(Path, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0640)
