@@ -1,11 +1,12 @@
 package confy
 
 import (
- 	"reflect"
- 	"strconv"
+	"reflect"
+	"strconv"
 	"strings"
 	"errors"
 	"os"
+	"time"
 )
 
 
@@ -77,7 +78,13 @@ func SetField(v reflect.Value, s string) {
 		case "string":
 			v.SetString(s)
 		case "int", "int8", "int16", "int32", "int64":
-			n, _ := strconv.ParseInt(s, 10, 64)
+		  var n int64
+		  if v.Type() == reflect.TypeOf(time.Hour) {
+			  td, _ := time.ParseDuration(s)
+			  n = int64(td)
+		  } else {
+			  n, _ = strconv.ParseInt(s, 10, 64)
+		  }
 			v.SetInt(n)
 		case "uint8", "uint16", "uint32", "uint64":
 			n, _ := strconv.ParseUint(s, 10, 64)
