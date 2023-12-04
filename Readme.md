@@ -6,8 +6,8 @@ go get github.com/yurajp/confy
 
 Just two parameters you can change: path to file and indent size. E.g.:
 
-confy.Indt = "  "
-confy.Path = "conf/myconf.ini"
+confy.SetIndent(4)
+confy.SetPath("conf/myconf.ini")
 
 Defaults are "   " and "config/conf.ini".
 

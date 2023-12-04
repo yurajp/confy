@@ -17,6 +17,15 @@ type Vall struct {
 	Level int
 }
 
+func SetPath(p string) {
+	Path = p
+}
+
+func SetIndent(n int) {
+	i := strings.Repeat(" ", n)
+	Indt = i
+}
+
 func Indent(s string, l int) string {
 	indent := strings.Repeat(Indt, l)
 	return indent + s
