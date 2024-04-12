@@ -167,7 +167,7 @@ func WriteConfig(s string) error {
 		return fmt.Errorf("Cannot open file: %s", err)
 	}
 	defer f.Close()
-	header := "# github.com/yurajp/confy\n\n"
+	header := "# github.com/yurajp/confy\n"
 	_, err = f.WriteString(header + s)
 	if err != nil {
 		return fmt.Errorf("Cannot write file: %s", err)
