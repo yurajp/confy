@@ -141,6 +141,9 @@ func ReadConfig() ([]string, error) {
 		if len(ln) < 2 {
 			break
 		}
+		if strings.HasPrefix(strings.TrimSpace(ln), "#") {
+			continue
+		}
 		slc := strings.Fields(ln)
 		val := ""
 		if len(slc) == 1 {

@@ -11,6 +11,7 @@ confy.SetPath("conf/myconf.ini")
 
 Defaults are "   " and "config/conf.ini".
 
+You can use comments in writen ini. Use '#'.
 To store your data struct in file:
 
 err := confy.WriteConfy(<myconf>)
@@ -18,8 +19,13 @@ err := confy.WriteConfy(<myconf>)
 This will write variable 'myconf' of your type to file that has defined in Path.
 Then you load data to interface variable and convert it to your type.
 
-iface, err := confy.LoadConfy()
+myconf := Config{}
+iface, err := confy.LoadConfy(myconf)
 ...
-config := iface.(mystruct)
+mc, ok = iface.(Config)
+if !ok {
+	...
+}
+myconf = &mc
 
 Good luck!

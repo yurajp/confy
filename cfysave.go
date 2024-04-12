@@ -167,11 +167,12 @@ func WriteConfig(s string) error {
 		return fmt.Errorf("Cannot open file: %s", err)
 	}
 	defer f.Close()
-	_, err = f.WriteString(s)
+	header := "# github.com/yurajp/confy\n\n"
+	_, err = f.WriteString(header + s)
 	if err != nil {
 		return fmt.Errorf("Cannot write file: %s", err)
 	}
- 	return nil
+	return nil
 }
 
 func ConfigExists() bool {
