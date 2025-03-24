@@ -1,0 +1,25 @@
+Confy is the small and simple library to store struct data such as config. It is available to write data to file and to load it back to struct. Supports nested structs, slices and maps (map cannot contain structs).
+Similar to json you can view and edit confy file but more user friendly - file contains field types and indents.
+
+    go get github.com/yurajp/confy@v2
+...
+
+Just one parameter you can change: indent size. E.g.:
+
+    confy.SetIndent(4)
+Default is "   ".
+
+To store your data struct (e.g. myconf) in file with path 'config/conf':
+
+    err := confy.WriteConfy(myconf, "config/conf")
+
+File name can have any extension you like, file is just text file.
+This will write variable 'myconf' of your type to file.
+Then you load data to interface variable and convert it to your type.
+
+    var myconf Myconf
+    iface, err := confy.LoadConfy(myconf, "config/conf")
+    if err...{...}
+    config := iface.(Myconf)
+
+Good luck!
