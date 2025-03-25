@@ -78,7 +78,7 @@ func ValToStruct(v Vall) ([]string, []Vall) {
 			continue
 		}
 		if kind == "map" {
-			mt := " " + ftype.String() + "\n"
+			mt := " " + ftype.String() + ":\n"
 			line = name + kind + mt
 			Info = append(Info, Indent(line, v.Level))
 			Info = append(Info, "@")

@@ -22,6 +22,9 @@ func SetFields(v reflect.Value, ss []string) any {
 		} else {
 			SetField(vf, s)
 			n++
+			if n == len(ss) {
+				break
+			}
 		}
 	}
 	return v.Interface()
@@ -42,7 +45,7 @@ func SetMap(v reflect.Value, n int, ss []string) int {
 	m := reflect.Indirect(reflect.MakeMap(v.Type()))
 	tk := v.Type().Key()
 	tv := v.Type().Elem()
-	for {
+	for n < len(ss) {
 		sls := strings.Split(ss[n], ":")
 		if len(sls) < 2 || sls[1] == "" || sls[1] == "\n" || strings.HasPrefix(sls[1], " ") {
 			break
