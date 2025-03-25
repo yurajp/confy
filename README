@@ -21,5 +21,35 @@ Then you load data to interface variable and convert it to your type.
     iface, err := confy.LoadConfy(myconf, "config/conf")
     if err...{...}
     config := iface.(Myconf)
+    
+Another simple feature is ability load variables from local file.
+It export them to OS environment (like .godotenv). You should define name or path to file.
+Syntax is similar .godotenv:
 
-Good luck!
+	SECRET_KEY=98jRj64OYR0864
+
+Loading to OS environment:
+
+	err := confy.LoadEnv("path/to/file")
+	if err...
+	val := os.Getenv("MY_VAR")
+	
+You might create file and add a variable by simple code, e.g:
+
+	path := ".env"
+ 	err := confy.AddVar(path, "MY_VAR", "73aB55uFx")
+ 	err = confy.AddVar(path, "ANOTHER_VAR", "56Ze77iNm")
+ 	
+This will create file .env with two lines:
+
+    MY_VAR=73aB55uFx
+ 	ANOTHER_VAR=56Ze77iNm
+ 	.....
+ 	
+ 	confy.LoadEnv(path)
+ 	myVar := os.Getenv("MY_VAR") // 73aB55uFx
+ 	.....
+ 	
+That's all for now.
+
+GOOD LUCK!
