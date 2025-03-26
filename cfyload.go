@@ -139,6 +139,10 @@ func ReadConfig(path string) ([]string, error) {
 	sf := strings.Split(string(bts), "\n")
 	sv := []string{}
 	for _, ln := range sf {
+		ln = strings.TrimSpace(ln)
+		if strings.HasPrefix(ln, "#") {
+			continue
+		}
 		if len(ln) < 2 {
 			break
 		}
